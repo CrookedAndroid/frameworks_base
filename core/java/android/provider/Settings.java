@@ -5504,6 +5504,11 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_COLORED_ICONS = "statusbar_colored_icons";
+        
+        /**
+         * @hide
+         */
+        public static final String GLOBAL_ACTIONS_LIST = "global_actions_list";
 
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
@@ -10186,6 +10191,11 @@ public final class Settings {
          */
         @Readable
         public static final String NOTIFICATION_DISMISS_RTL = "notification_dismiss_rtl";
+
+        /**
+         * @hide
+         */
+        public static final String ADVANCED_REBOOT = "advanced_reboot";
 
         /**
          * Comma separated list of QS tiles that have been auto-added already.
