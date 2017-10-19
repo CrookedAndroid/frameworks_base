@@ -15,6 +15,11 @@
      limitations under the License.
 -->
 <resources>
+
     <!-- Udfps HBM provider class name -->
     <string name="config_udfpsHbmProviderComponent">com.android.systemui.biometrics.DummyUdfpsHbmProvider</string>
+
+    <!-- Title of statusbar tuner -->
+    <string name="status_bar_icons">Status bar icons</string>
+
 </resources>
