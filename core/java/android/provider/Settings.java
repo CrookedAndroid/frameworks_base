@@ -5342,14 +5342,14 @@ public final class Settings {
          * @hide
          */
         public static final String SEEK_BAR_BATTERY_CHARGE_LEVEL_SOUND = "battery_level_charge_seek_bar";
-        
+
         /**
          * IMPORTANT: If you add a new public settings you also have to add it to
          * PUBLIC_SETTINGS below. If the new setting is hidden you have to add
          * it to PRIVATE_SETTINGS below. Also add a validator that can validate
          * the setting value. See an example above.
          */
-         
+
         /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
@@ -5361,7 +5361,7 @@ public final class Settings {
          */
         public static final String[] LEGACY_RESTORE_SETTINGS = {
         };
-        
+
         /**
          * Whether the torch launch gesture to long press the power button when the
          * screen is off should be enabled. *
@@ -5370,12 +5370,12 @@ public final class Settings {
          * @hide
          */
         public static final String TORCH_POWER_BUTTON_GESTURE = "torch_power_button_gesture";
-        
+
         /**
          * @hide
          */
         public static final String QS_TRANSPARENCY = "qs_transparency";
-
+        
         /**
          * Show app volume rows in volume panel
          * @hide
@@ -5387,6 +5387,18 @@ public final class Settings {
          * @hide
          */
         public static final String STATUSBAR_COLORED_ICONS = "statusbar_colored_icons";
+        
+        /**
+         * Wheter to show network traffic indicator in statusbar
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_STATE = "network_traffic_state";
+
+        /**
+         * Network traffic inactivity threshold (default is 1 kBs)
+         * @hide
+         */
+        public static final String NETWORK_TRAFFIC_AUTOHIDE_THRESHOLD = "network_traffic_autohide_threshold";
 
         /**
          * These are all public system settings
