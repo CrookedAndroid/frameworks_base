@@ -902,16 +902,6 @@
             </intent-filter>
         </receiver>
 
-<<<<<<< HEAD
-=======
-        <!-- Wifi Timeout -->
-        <receiver android:name="com.android.settingslib.wifi.WifiTimeoutReceiver"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.net.wifi.intent.TIMEOUT" />
-            </intent-filter>
-        </receiver>
-
         <!-- Columbus -->
         <service
             android:name="com.google.android.systemui.columbus.ColumbusServiceProxy"
@@ -926,15 +916,11 @@
             </intent-filter>
         </service>
 
-<<<<<<< HEAD
->>>>>>> ee8dfa6e7f85 (SystemUI: Port columbus (quick tap) from SQ1D)
-=======
         <!-- Elmyra -->
         <service
             android:name="com.google.android.systemui.elmyra.ElmyraServiceProxy"
             android:permission="com.google.android.elmyra.permission.CONFIGURE_ASSIST_GESTURE"
             android:exported="true"/>
 
->>>>>>> b0c9fdae6c54 (SystemUI: Port elmyra (squeeze) from SQ1D)
     </application>
 </manifest>
