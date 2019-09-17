@@ -92,5 +92,6 @@ public class SystemSettings {
         Settings.System.ARTWORK_MEDIA_BACKGROUND_BLUR_RADIUS,
         Settings.System.ARTWORK_MEDIA_BACKGROUND_ALPHA,
         Settings.System.LOCKSCREEN_SMALL_CLOCK,
+        Settings.System.COLOR_BUCKET_OVERLAY,
     };
 }
