@@ -89,5 +89,6 @@ public class SystemSettings {
         Settings.System.ARTWORK_MEDIA_BACKGROUND_BLUR_RADIUS,
         Settings.System.ARTWORK_MEDIA_BACKGROUND_ALPHA,
         Settings.System.SHOW_APP_VOLUME,
+        Settings.System.DOZE_ON_CHARGE,
     };
 }
