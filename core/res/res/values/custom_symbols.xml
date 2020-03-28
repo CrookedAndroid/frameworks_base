@@ -42,5 +42,8 @@
 
   <!-- Spoof Pixel FP for some apps -->
   <java-symbol type="bool" name="config_spoofGoogleApps" />
+
+  <!-- Enable face auth only when swiping security view -->
+  <java-symbol type="bool" name="config_faceAuthOnlyOnSecurityView" />
   
 </resources>
