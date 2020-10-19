@@ -22,5 +22,11 @@
     <!-- Screenshot QS tile -->
     <string name="quick_settings_screenshot_label">Screenshot</string>
     <string name="quick_settings_region_screenshot_label">Partial screenshot</string>
+    
+    <!-- Label for UI element which allows deleting the screenshot [CHAR LIMIT=30] -->
+    <string name="screenshot_delete_label">Delete</string>
+
+    <!-- Content description indicating that tapping the element will allow deleting the screenshot [CHAR LIMIT=NONE] -->
+    <string name="screenshot_delete_description">Delete screenshot</string>
 
 </resources>
