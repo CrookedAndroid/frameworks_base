@@ -231,5 +231,5 @@ interface IStatusBarService
      * @hide
      */    
     void toggleCameraFlash();
-
+    void screenPinningStateChanged(boolean enabled);
 }
