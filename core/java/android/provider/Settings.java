@@ -11286,6 +11286,12 @@ public final class Settings {
         public static final String LAUNCHER_HIDDEN_APPS = "launcher_hidden_apps";
 
         /**
+         * Pulse ambient music visualizer
+         * @hide
+         */
+        public static final String AMBIENT_PULSE_ENABLED = "ambient_pulse_enabled";
+
+        /**
          * These entries are considered common between the personal and the managed profile,
          * since the managed profile doesn't get to change them.
          */
