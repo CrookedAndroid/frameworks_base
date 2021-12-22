@@ -5563,6 +5563,26 @@ public final class Settings {
         public static final String STATUSBAR_COLORED_ICONS = "statusbar_colored_icons";
 
         /**
+         * @hide
+         */
+        public static final String QS_LAYOUT_COLUMNS_LANDSCAPE = "qs_layout_columns_landscape";
+
+        /**
+         * @hide
+         */
+        public static final String QS_LAYOUT_COLUMNS = "qs_layout_columns";
+
+        /**
+         * @hide
+         */
+        public static final String QS_TILE_VERTICAL_LAYOUT = "qs_tile_vertical_layout";
+
+        /**
+         * @hide
+         */
+        public static final String QS_TILE_LABEL_HIDE = "qs_tile_label_hide";
+
+        /**
          * Keys we no longer back up under the current schema, but want to continue to
          * process when restoring historical backup datasets.
          *
