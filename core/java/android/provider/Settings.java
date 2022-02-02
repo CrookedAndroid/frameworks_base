@@ -5375,6 +5375,12 @@ public final class Settings {
          * @hide
          */
         public static final String QS_TRANSPARENCY = "qs_transparency";
+        
+        /**
+         * Show app volume rows in volume panel
+         * @hide
+         */
+        public static final String SHOW_APP_VOLUME = "show_app_volume";
 
         /**
          * These are all public system settings
@@ -5485,6 +5491,7 @@ public final class Settings {
             PRIVATE_SETTINGS.add(DISPLAY_COLOR_MODE_VENDOR_HINT);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_LOCKSCREEN);
             PRIVATE_SETTINGS.add(DOUBLE_TAP_SLEEP_GESTURE);
+            PRIVATE_SETTINGS.add(SHOW_APP_VOLUME);
         }
 
         /**
@@ -17069,7 +17076,13 @@ public final class Settings {
         @SdkConstant(SdkConstant.SdkConstantType.ACTIVITY_INTENT_ACTION)
         public static final String ACTION_VOLUME =
                 "android.settings.panel.action.VOLUME";
-    }
+
+        /**
+         * @hide
+         */
+        public static final String ACTION_APP_VOLUME =
+                "android.settings.panel.action.APP_VOLUME";
+    }           
 
     /**
      * Activity Action: Show setting page to process the addition of Wi-Fi networks to the user's
