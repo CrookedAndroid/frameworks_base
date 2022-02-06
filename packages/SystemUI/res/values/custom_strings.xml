@@ -58,5 +58,8 @@
 
     <!-- Accessibility label for nfc icon (not shown on screen) [CHAR LIMIT=NONE] -->
     <string name="accessibility_status_bar_nfc">Nfc</string>
+    
+    <!-- Google lens screenshot notification -->
+    <string name="lens">Lens</string>
 
 </resources>
