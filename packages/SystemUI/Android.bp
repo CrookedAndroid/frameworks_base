@@ -107,6 +107,7 @@ android_library {
         "columbus-sysui-google",
         "elmyra-sysui-google",
         "vendor-pixelatoms-java",
+        "faceunlock_framework",
     ],
     manifest: "AndroidManifest.xml",
 
