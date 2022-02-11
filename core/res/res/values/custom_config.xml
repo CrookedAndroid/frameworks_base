@@ -16,4 +16,9 @@
 -->
 <resources>
 
+    <!-- Array containing custom error messages from vendor. -->
+    <string-array name="face_error_vendor" translatable="false">
+        <item>@string/face_unlock_disabled_idle</item>
+    </string-array>
+
 </resources>
