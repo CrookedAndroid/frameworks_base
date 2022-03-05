@@ -79,11 +79,11 @@ import com.android.systemui.theme.ThemeOverlayController;
 import com.android.systemui.util.concurrency.DelayableExecutor;
 >>>>>>> 2779a54dba03 (SystemUI: Integrate smartspace and backgesture provider)
 
-import javax.inject.Named;
-
 import dagger.Binds;
 import dagger.Module;
 import dagger.Provides;
+
+import javax.inject.Named;
 
 @Module(includes = {
         MediaModule.class,
