@@ -58,10 +58,12 @@ android_library {
         "src/**/I*.aidl",
     ],
     resource_dirs: [
+        "res",
         "res-product",
         "res-keyguard",
         "res-smartspace",
-        "res",
+        "res-columbus",
+        "res-assist",
     ],
     static_libs: [
         "WindowManager-Shell",
@@ -101,6 +103,9 @@ android_library {
         "backgesture-google",
         "smartspace-google",
         "tensorflowlite_java",
+        "assistmanager-google",
+        "columbus-sysui-google",
+        "vendor-pixelatoms-java",
     ],
     manifest: "AndroidManifest.xml",
 
