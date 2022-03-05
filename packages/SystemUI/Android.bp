@@ -105,6 +105,7 @@ android_library {
         "tensorflowlite_java",
         "assistmanager-google",
         "columbus-sysui-google",
+        "elmyra-sysui-google",
         "vendor-pixelatoms-java",
     ],
     manifest: "AndroidManifest.xml",

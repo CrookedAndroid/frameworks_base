@@ -307,6 +307,12 @@
     <uses-permission android:name="com.google.android.columbus.permission.CONFIGURE_COLUMBUS_GESTURE"/>
     <uses-permission android:name="android.permission.HIGH_SAMPLING_RATE_SENSORS"/>
 
+    <permission android:name="com.google.android.elmyra.permission.CONFIGURE_ASSIST_GESTURE" android:protectionLevel="signature|preinstalled"/>
+    <permission android:name="com.google.sensor.elmyra.permission.USE_RAW_SENSOR" android:protectionLevel="signature|preinstalled"/>
+    <uses-permission android:name="com.google.android.elmyra.permission.CONFIGURE_ASSIST_GESTURE"/>
+    <uses-permission android:name="com.google.restricted_assist_gesture.permission.RESTRICTED_ASSIST_GESTURE_PROVIDER"/>
+    <uses-permission android:name="com.google.sensor.elmyra.permission.USE_RAW_SENSOR"/>
+
     <application
         android:name=".SystemUIApplication"
         android:persistent="true"
@@ -920,6 +926,15 @@
             </intent-filter>
         </service>
 
+<<<<<<< HEAD
 >>>>>>> ee8dfa6e7f85 (SystemUI: Port columbus (quick tap) from SQ1D)
+=======
+        <!-- Elmyra -->
+        <service
+            android:name="com.google.android.systemui.elmyra.ElmyraServiceProxy"
+            android:permission="com.google.android.elmyra.permission.CONFIGURE_ASSIST_GESTURE"
+            android:exported="true"/>
+
+>>>>>>> b0c9fdae6c54 (SystemUI: Port elmyra (squeeze) from SQ1D)
     </application>
 </manifest>
