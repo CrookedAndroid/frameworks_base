@@ -34,9 +34,11 @@ import com.android.systemui.qs.dagger.QSScope;
 import com.android.systemui.qs.logging.QSLogger;
 import com.android.systemui.qs.TileUtils;
 import com.android.systemui.util.leak.RotationUtils;
-import com.android.systemui.tuner.TunerService;
+import com.android.systemui.settings.brightness.BrightnessController;
 import com.android.systemui.settings.brightness.BrightnessMirrorHandler;
+import com.android.systemui.settings.brightness.BrightnessSliderController;
 import com.android.systemui.statusbar.policy.BrightnessMirrorController;
+import com.android.systemui.tuner.TunerService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,10 +53,11 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
         implements TunerService.Tunable {
 
     private final Provider<Boolean> mUsingCollapsedLandscapeMediaProvider;
+    private final BrightnessController mBrightnessController;
     private final TunerService mTunerService;
-    // brightness is visible only in split shade
-    private final QuickQSBrightnessController mBrightnessController;
+    private final BrightnessSliderController mBrightnessSliderController;
     private final BrightnessMirrorHandler mBrightnessMirrorHandler;
+    private BrightnessMirrorController mBrightnessMirrorController;
 
     @Inject
     QuickQSPanelController(QuickQSPanel view, QSTileHost qsTileHost,
@@ -64,15 +67,20 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
             @Named(QS_USING_COLLAPSED_LANDSCAPE_MEDIA)
                     Provider<Boolean> usingCollapsedLandscapeMediaProvider,
             MetricsLogger metricsLogger, UiEventLogger uiEventLogger, QSLogger qsLogger,
-            DumpManager dumpManager, TunerService tunerService,
-            QuickQSBrightnessController quickQSBrightnessController,
-            @Named(QQS_FOOTER) FooterActionsController footerActionsController
+            DumpManager dumpManager,
+            TunerService tunerService,
+            BrightnessController.Factory brightnessControllerFactory,
+            BrightnessSliderController.Factory brightnessSliderFactory
     ) {
         super(view, qsTileHost, qsCustomizerController, usingMediaPlayer, mediaHost, metricsLogger,
                 uiEventLogger, qsLogger, dumpManager, tunerService);
         mUsingCollapsedLandscapeMediaProvider = usingCollapsedLandscapeMediaProvider;
         mTunerService = tunerService;
-        mBrightnessController = quickQSBrightnessController;
+
+        mBrightnessSliderController = brightnessSliderFactory.create(getContext(), mView);
+        mView.setBrightnessView(mBrightnessSliderController.getRootView());
+
+        mBrightnessController = brightnessControllerFactory.create(mBrightnessSliderController);
         mBrightnessMirrorHandler = new BrightnessMirrorHandler(mBrightnessController);
     }
 
@@ -82,7 +90,7 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
         updateMediaExpansion();
         mMediaHost.setShowsOnlyActiveMedia(true);
         mMediaHost.init(MediaHierarchyManager.LOCATION_QQS);
-        mBrightnessController.init(mShouldUseSplitNotificationShade);
+        mBrightnessSliderController.init();
     }
 
     private void updateMediaExpansion() {
@@ -105,6 +113,16 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
     @Override
     protected void onViewAttached() {
         super.onViewAttached();
+
+        mTunerService.addTunable(mView, QSPanel.QS_BRIGHTNESS_SLIDER_POSITION);
+        mTunerService.addTunable(mView, QSPanel.QS_SHOW_AUTO_BRIGHTNESS);
+        mTunerService.addTunable(mView, QSPanel.QS_SHOW_BRIGHTNESS_SLIDER);
+
+        mView.setBrightnessRunnable(() -> {
+            mView.updateResources();
+            updateBrightnessMirror();
+        });
+
         mBrightnessMirrorHandler.onQsPanelAttached();
     }
 
@@ -112,7 +130,31 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
     protected void onViewDetached() {
         super.onViewDetached();
         mTunerService.removeTunable(mView);
+        mView.setBrightnessRunnable(null);
         mBrightnessMirrorHandler.onQsPanelDettached();
+    }
+
+    private void updateBrightnessMirror() {
+        if (mBrightnessMirrorController != null) {
+            mBrightnessSliderController.setMirrorControllerAndMirror(mBrightnessMirrorController);
+        }
+    }
+
+    @Override
+    void setListening(boolean listening) {
+        super.setListening(listening);
+
+        // Set the listening as soon as the QS fragment starts listening regardless of the
+        //expansion, so it will update the current brightness before the slider is visible.
+        if (listening) {
+            mBrightnessController.registerCallbacks();
+        } else {
+            mBrightnessController.unregisterCallbacks();
+        }
+    }
+
+    public boolean isListening() {
+        return mView.isListening();
     }
 
     private void setMaxTiles(int parseNumTiles) {
@@ -134,7 +176,6 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
             setMaxTiles(newMaxTiles);
         }
         updateMediaExpansion();
-        mBrightnessController.refreshVisibility(mShouldUseSplitNotificationShade);
     }
 
     @Override
@@ -158,6 +199,7 @@ public class QuickQSPanelController extends QSPanelControllerBase<QuickQSPanel>
     }
 
     public void setBrightnessMirror(BrightnessMirrorController brightnessMirrorController) {
+        mBrightnessMirrorController = brightnessMirrorController;
         mBrightnessMirrorHandler.setController(brightnessMirrorController);
     }
 }
