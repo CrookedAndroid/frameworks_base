@@ -24,6 +24,7 @@
         <item>reboot_recovery</item>
         <item>reboot_bootloader</item>
         <item>reboot_fastboot</item>
+        <item>reboot_sysui</item>
     </string-array>
 
     <!-- Defines all possible global actions -->
