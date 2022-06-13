@@ -21,5 +21,8 @@
     
     <!-- Screen Record -->
     <dimen name="screenrecord_dot_size">48dp</dimen>
+    
+    <!-- Network traffic -->
+    <dimen name="network_traffic_width">25sp</dimen>
 
 </resources>
