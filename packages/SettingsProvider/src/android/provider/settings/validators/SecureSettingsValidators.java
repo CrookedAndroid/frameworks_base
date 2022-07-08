@@ -217,6 +217,7 @@ public class SecureSettingsValidators {
         VALIDATORS.put(Secure.LOCK_SCREEN_CUSTOM_CLOCK_FACE, JSON_OBJECT_VALIDATOR);
         VALIDATORS.put(Secure.LOCK_SCREEN_WHEN_TRUST_LOST, BOOLEAN_VALIDATOR);
         VALIDATORS.put(Secure.SKIP_GESTURE, BOOLEAN_VALIDATOR);
+        VALIDATORS.put(Secure.SHOW_WIFI_STANDARD_ICON, BOOLEAN_VALIDATOR);
         /*
          * Only used if FeatureFlag "settings_skip_direction_mutable" is enabled.
          * If feature flag is disabled, should assume SKIP_DIRECTION = 0.
