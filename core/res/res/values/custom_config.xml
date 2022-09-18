@@ -22,4 +22,7 @@
     <!-- Fingerprint from stock ROM -->
     <string name="config_stockFingerprint" translatable="false"></string>
 
+    <!-- Fingerprint from a certified model -->
+    <string name="config_certifiedModel" translatable="false"></string>
+
 </resources>
