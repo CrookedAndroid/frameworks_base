@@ -874,7 +874,7 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
 
     boolean mEnteringAnimation;
     boolean mOverrideTaskTransition;
-    boolean mDismissKeyguardIfInsecure;
+    boolean mDismissKeyguard;
 
     boolean mAppStopped;
     // A hint to override the window specified rotation animation, or -1 to use the window specified
@@ -1993,7 +1993,7 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
             }
 
             mOverrideTaskTransition = options.getOverrideTaskTransition();
-            mDismissKeyguardIfInsecure = options.getDismissKeyguardIfInsecure();
+            mDismissKeyguard = options.getDismissKeyguard();
         }
 
         ColorDisplayService.ColorDisplayServiceInternal cds = LocalServices.getService(
@@ -4884,8 +4884,12 @@ final class ActivityRecord extends WindowToken implements WindowManagerService.A
     ActivityOptions takeOptions() {
         if (DEBUG_TRANSITION) Slog.i(TAG, "Taking options for " + this + " callers="
                 + Debug.getCallers(6));
+        if (mPendingOptions == null) return null;
         final ActivityOptions opts = mPendingOptions;
         mPendingOptions = null;
+        // Strip sensitive information from options before sending it to app.
+        opts.setRemoteTransition(null);
+        opts.setRemoteAnimationAdapter(null);
         return opts;
     }
 
