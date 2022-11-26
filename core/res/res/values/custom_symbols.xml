@@ -12,12 +12,6 @@
     limitations under the License.
 -->
 <resources>
-
-    <!-- Fingerprint from a certified device against current platform SPL level -->
-    <java-symbol type="string" name="config_certifiedFingerprint" />
-
-    <!-- Fingerprint from stock ROM -->
-    <java-symbol type="string" name="config_stockFingerprint" />
     
   <!-- Power menu reboot -->
   <java-symbol name="reboot_to_bootloader_title" type="string" />
