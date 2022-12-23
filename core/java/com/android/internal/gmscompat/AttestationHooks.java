@@ -32,8 +32,7 @@ public final class AttestationHooks {
 
     private static final String PROCESS_UNSTABLE = "com.google.android.gms.unstable";
 
-    private static final String PRODUCT_STOCK_FINGERPRINT =
-            SystemProperties.get("ro.build.stock_fingerprint");
+    private static final String PRODUCT_STOCK_FINGERPRINT = "google/cheetah/cheetah:13/TQ1A.221205.011/9244662:user/release-keys";
 
     private static volatile boolean sIsGms = false;
 
@@ -57,9 +56,7 @@ public final class AttestationHooks {
 
     private static void spoofBuildGms() {
         // Set fingerprint for SafetyNet CTS profile
-        if (PRODUCT_STOCK_FINGERPRINT.length() > 0) {
-            setBuildField("FINGERPRINT", PRODUCT_STOCK_FINGERPRINT);
-        }
+        setBuildField("FINGERPRINT", PRODUCT_STOCK_FINGERPRINT);
 
         // Alter model name to avoid hardware attestation enforcement
         setBuildField("MODEL", Build.MODEL + " ");
