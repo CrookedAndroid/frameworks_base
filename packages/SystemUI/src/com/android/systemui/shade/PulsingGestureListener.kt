@@ -71,7 +71,7 @@ class PulsingGestureListener @Inject constructor(
     private val quickQsOffsetHeight: Int
 
     init {
-        val tunable = Tunable { key: String?, _: String? ->
+        val tunable = Tunable { key: String?, value: String? ->
             when (key) {
                 Settings.Secure.DOZE_DOUBLE_TAP_GESTURE ->
                     doubleTapEnabled = ambientDisplayConfiguration.doubleTapGestureEnabled(
@@ -131,7 +131,8 @@ class PulsingGestureListener @Inject constructor(
                 centralSurfaces.wakeUpIfDozing(
                         SystemClock.uptimeMillis(),
                         notificationShadeWindowView,
-                        "PULSING_DOUBLE_TAP")
+                        "PULSING_DOUBLE_TAP",
+                        PowerManager.WAKE_REASON_TAP)
                 return true
             } else if (!statusBarStateController.isDozing &&
                 doubleTapToSleepEnabled &&
