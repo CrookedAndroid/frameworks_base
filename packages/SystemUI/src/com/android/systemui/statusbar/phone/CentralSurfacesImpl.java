@@ -245,6 +245,7 @@ import com.android.systemui.volume.VolumeComponent;
 import com.android.wm.shell.bubbles.Bubbles;
 import com.android.wm.shell.startingsurface.SplashscreenContentDrawer;
 import com.android.wm.shell.startingsurface.StartingSurface;
+import com.android.systemui.tuner.TunerService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -528,6 +529,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
     private final KeyguardUnlockAnimationController mKeyguardUnlockAnimationController;
     private final MessageRouter mMessageRouter;
     private final WallpaperManager mWallpaperManager;
+    private final TunerService mTunerService;
 
     private CentralSurfacesComponent mCentralSurfacesComponent;
 
@@ -770,7 +772,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
             WiredChargingRippleController wiredChargingRippleController,
             IDreamManager dreamManager,
             Lazy<CameraLauncher> cameraLauncherLazy,
-            Lazy<LightRevealScrimViewModel> lightRevealScrimViewModelLazy) {
+            Lazy<LightRevealScrimViewModel> lightRevealScrimViewModelLazy, TunerService tunerService) {
         mContext = context;
         mNotificationsController = notificationsController;
         mFragmentService = fragmentService;
@@ -886,6 +888,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
         wiredChargingRippleController.registerCallbacks();
 
         mLightRevealScrimViewModelLazy = lightRevealScrimViewModelLazy;
+        mTunerService = tunerService;
     }
 
     @Override

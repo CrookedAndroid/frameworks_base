@@ -32,7 +32,7 @@ public final class AttestationHooks {
 
     private static final String PROCESS_UNSTABLE = "com.google.android.gms.unstable";
 
-    private static final String PRODUCT_STOCK_FINGERPRINT = "google/cheetah/cheetah:13/TQ1A.221205.011/9244662:user/release-keys";
+    private static final String PRODUCT_STOCK_FINGERPRINT = "google/cheetah/cheetah:13/TQ2A.230505.002/9891397:user/release-keys";
 
     private static volatile boolean sIsGms = false;
 
