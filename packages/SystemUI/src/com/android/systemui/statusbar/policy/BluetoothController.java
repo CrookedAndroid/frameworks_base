@@ -44,8 +44,6 @@ public interface BluetoothController extends CallbackController<Callback>, Dumpa
     int getBondState(CachedBluetoothDevice device);
     List<CachedBluetoothDevice> getConnectedDevices();
 
-    int getBatteryLevel();
-
     public interface Callback {
         void onBluetoothStateChange(boolean enabled);
         void onBluetoothDevicesChanged();
