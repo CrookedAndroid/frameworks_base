@@ -273,9 +273,7 @@ import dagger.Lazy;
  * </b>
  */
 @SysUISingleton
-public class CentralSurfacesImpl extends CoreStartable implements
-        TunerService.Tunable,
-        CentralSurfaces {
+public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, TunerService.Tunable {
         
     private static final String QS_TRANSPARENCY =
             "system:" + Settings.System.QS_TRANSPARENCY;
