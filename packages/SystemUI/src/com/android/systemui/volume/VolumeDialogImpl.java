@@ -55,7 +55,6 @@ import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.content.res.TypedArray;
-import android.database.ContentObserver;
 import android.graphics.Color;
 import android.graphics.Outline;
 import android.graphics.PixelFormat;
@@ -73,7 +72,6 @@ import android.os.Looper;
 import android.os.Message;
 import android.os.SystemClock;
 import android.os.Trace;
-import android.os.UserHandle;
 import android.os.VibrationEffect;
 import android.provider.Settings;
 import android.provider.Settings.Global;
@@ -279,9 +277,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
     private BackgroundBlurDrawable mDialogRowsViewBackground;
     private final InteractionJankMonitor mInteractionJankMonitor;
 
-    // Volume panel placement left or right
-    private boolean mVolumePanelOnLeft;
-
     public VolumeDialogImpl(
             Context context,
             VolumeDialogController volumeDialogController,
@@ -334,7 +329,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         }
 
         initDimens();
-        mVolumePanelOnLeft = mContext.getResources().getBoolean(R.bool.config_audioPanelOnLeftSide);
     }
 
     @Override
@@ -437,11 +431,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         lp.format = PixelFormat.TRANSLUCENT;
         lp.setTitle(VolumeDialogImpl.class.getSimpleName());
         lp.windowAnimations = -1;
-        if (!isAudioPanelOnLeftSide() || isLandscape()) {
-            lp.gravity = Gravity.RIGHT | Gravity.CENTER_VERTICAL;
-        } else {
-            lp.gravity = Gravity.LEFT | Gravity.CENTER_VERTICAL;
-        }
+        lp.gravity = mContext.getResources().getInteger(R.integer.volume_dialog_gravity);
         mWindow.setAttributes(lp);
         mWindow.setLayout(WRAP_CONTENT, WRAP_CONTENT);
 
@@ -452,7 +442,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mDialog.setOnShowListener(dialog -> {
             mDialogView.getViewTreeObserver().addOnComputeInternalInsetsListener(this);
             if (!shouldSlideInVolumeTray()) {
-                mDialogView.setTranslationX(getAnimatorX());
+                mDialogView.setTranslationX(mDialogView.getWidth() / 2.0f);
             }
             mDialogView.setAlpha(0);
             mDialogView.animate()
@@ -630,11 +620,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         mRingerCount = mShowVibrate ? 3 : 2;
     }
 
-    private float getAnimatorX() {
-        final float x = mDialogView.getWidth() / 2.0f;
-        return mVolumePanelOnLeft ? -x : x;
-    }
-
     protected ViewGroup getDialogView() {
         return mDialogView;
     }
@@ -686,11 +671,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
         if (D.BUG) Slog.d(TAG, "Adding row for stream " + stream);
         VolumeRow row = new VolumeRow();
         initRow(row, stream, iconRes, iconMuteRes, important, defaultStream);
-        if (!isAudioPanelOnLeftSide() || isLandscape()) {
-            mDialogRowsView.addView(row.view, 0);
-        } else {
-            mDialogRowsView.addView(row.view);
-        }
+        mDialogRowsView.addView(row.view);
         mRows.add(row);
     }
 
@@ -700,11 +681,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
             final VolumeRow row = mRows.get(i);
             initRow(row, row.stream, row.iconRes, row.iconMuteRes, row.important,
                     row.defaultStream);
-            if (!isAudioPanelOnLeftSide() || isLandscape()) {
-                mDialogRowsView.addView(row.view, 0);
-            } else {
-                mDialogRowsView.addView(row.view);
-            }
+            mDialogRowsView.addView(row.view);
             updateVolumeRowH(row);
         }
     }
@@ -1427,7 +1404,7 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
 
                     hideRingerDrawer();
                 }, 50));
-        if (!shouldSlideInVolumeTray()) animator.translationX(getAnimatorX());
+        if (!shouldSlideInVolumeTray()) animator.translationX(mDialogView.getWidth() / 2.0f);
         animator.setListener(getJankListener(getDialogView(), TYPE_DISMISS,
                 mDialogHideAnimationDurationMs)).start();
         checkODICaptionsTooltip(true);
@@ -2321,10 +2298,6 @@ public class VolumeDialogImpl implements VolumeDialog, Dumpable,
             rescheduleTimeoutH();
             return super.onRequestSendAccessibilityEvent(host, child, event);
         }
-    }
-
-    private boolean isAudioPanelOnLeftSide() {
-        return mVolumePanelOnLeft;
     }
 
     private static class VolumeRow {
