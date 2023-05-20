@@ -66,4 +66,9 @@
     <java-symbol type="string" name="config_batterymeterLandBoltPathOrigami" />
     <java-symbol type="string" name="config_batterymeterLandPowersavePathOrigami" />
     <java-symbol type="string" name="config_batterymeterLandErrorPerimeterPathOrigami" />
+
+    <java-symbol type="anim" name="activity_freeform_open_enter" />
+    <java-symbol type="anim" name="activity_freeform_open_exit" />
+    <java-symbol type="anim" name="activity_freeform_close_enter" />
+    <java-symbol type="anim" name="activity_freeform_close_exit" />
 </resources>
