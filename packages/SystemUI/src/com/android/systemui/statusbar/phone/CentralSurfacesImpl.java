@@ -856,7 +856,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces, Tune
         mOngoingCallController = ongoingCallController;
         mStatusBarSignalPolicy = statusBarSignalPolicy;
         mStatusBarHideIconsForBouncerManager = statusBarHideIconsForBouncerManager;
-        mFeatureFlags = featureFlags;8f741b7
+        mFeatureFlags = featureFlags;
         mKeyguardUnlockAnimationController = keyguardUnlockAnimationController;
         mMainExecutor = delayableExecutor;
         mMessageRouter = messageRouter;
