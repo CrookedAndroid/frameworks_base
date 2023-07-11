@@ -248,6 +248,7 @@ import com.android.systemui.volume.VolumeComponent;
 import com.android.wm.shell.bubbles.Bubbles;
 import com.android.wm.shell.startingsurface.SplashscreenContentDrawer;
 import com.android.wm.shell.startingsurface.StartingSurface;
+import com.android.systemui.tuner.TunerService;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -530,6 +531,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
     private final WallpaperManager mWallpaperManager;
     private final UserTracker mUserTracker;
     private final Provider<FingerprintManager> mFingerprintManager;
+    private final TunerService mTunerService;
 
     private CentralSurfacesComponent mCentralSurfacesComponent;
 
@@ -774,7 +776,8 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
             Lazy<LightRevealScrimViewModel> lightRevealScrimViewModelLazy,
             AlternateBouncerInteractor alternateBouncerInteractor,
             UserTracker userTracker,
-            Provider<FingerprintManager> fingerprintManager
+            Provider<FingerprintManager> fingerprintManager,
+            TunerService tunerService
     ) {
         mContext = context;
         mNotificationsController = notificationsController;
@@ -856,6 +859,7 @@ public class CentralSurfacesImpl implements CoreStartable, CentralSurfaces {
         mAlternateBouncerInteractor = alternateBouncerInteractor;
         mUserTracker = userTracker;
         mFingerprintManager = fingerprintManager;
+        mTunerService = tunerService;
 
         mLockscreenShadeTransitionController = lockscreenShadeTransitionController;
         mStartingSurfaceOptional = startingSurfaceOptional;
